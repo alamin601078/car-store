@@ -1,4 +1,5 @@
 "use strict";
+//req and res manages
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -12,22 +13,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
-const config_1 = __importDefault(require("./config"));
-const app_1 = __importDefault(require("./app"));
-// const mongoose = require('mongoose');
-function main() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            yield mongoose_1.default.connect(config_1.default.database_url);
-            app_1.default.listen(config_1.default.prot, () => {
-                console.log(`Example app listening on port ${config_1.default.prot}`);
-            });
-        }
-        catch (error) {
-            console.log(error);
-        }
+exports.orderController = void 0;
+const order_model_1 = __importDefault(require("./order.model"));
+const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const payload = req.body;
+    const result = yield order_model_1.default.create(payload);
+    res.json({
+        masseges: 'Order created successfuly',
+        data: result,
     });
-}
-// console.log(config)
-main();
+});
+exports.orderController = {
+    createOrder,
+};
