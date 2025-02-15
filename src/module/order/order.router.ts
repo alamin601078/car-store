@@ -5,5 +5,6 @@ import { orderController } from "./order.controller"
 const orderRouter = Router()
 
 orderRouter.post('/orders', orderController.createOrder)
+orderRouter.get('/orders/revenue', orderController.orderReveneu)
 
 export default orderRouter
